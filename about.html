@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>О сервере — Clarity</title>
+<meta name="description" content="Ванильные и модовые сезоны, регулярные ивенты, свой лор и оптимизация — как устроен Clarity."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/logo.png"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  .season-card{ display:flex; flex-direction:column; gap:10px; }
+  .season-card .pill-tag{ align-self:flex-start; }
+  .season-card ul{ margin-top:4px; display:flex; flex-direction:column; gap:8px; }
+  .season-card ul li{ font-size:14.5px; color:var(--ink-soft); padding-left:18px; position:relative; }
+  .season-card ul li::before{ content:'—'; position:absolute; left:0; color:var(--sand-deep); font-weight:700; }
+
+  .events-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  @media(max-width:960px){ .events-grid{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:600px){ .events-grid{ grid-template-columns:1fr; } }
+
+  .lore-panel{
+    border-radius:var(--r-lg); padding:48px 44px;
+    background:linear-gradient(160deg, #ffffff, var(--bg-sand-2));
+    border:1px solid var(--line);
+    box-shadow:var(--shadow-md);
+    color:var(--ink); position:relative; overflow:hidden;
+  }
+  .lore-panel::before{
+    content:''; position:absolute; top:-80px; left:-80px; width:260px; height:260px;
+    border-radius:50%; background:radial-gradient(circle, var(--sand), transparent 70%);
+    opacity:.05; filter:blur(18px); pointer-events:none; z-index:0;
+  }
+  .lore-panel::after{
+    content:''; position:absolute; bottom:-80px; right:-80px; width:260px; height:260px;
+    border-radius:50%; background:radial-gradient(circle, var(--sand), transparent 70%);
+    opacity:.05; filter:blur(18px); pointer-events:none; z-index:0;
+  }
+  .lore-panel .eyebrow{ display:inline-flex; margin-bottom:18px; position:relative; z-index:1; }
+  .lore-panel h2{ color:var(--ink); font-size:clamp(26px,3.2vw,36px); margin-bottom:16px; max-width:620px; position:relative; z-index:1; }
+  .lore-panel p{ color:var(--ink-soft); font-size:15.5px; max-width:640px; margin-bottom:14px; position:relative; z-index:1; }
+  .lore-panel p:last-child{ margin-bottom:0; }
+
+  .tech-chips{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+  .tech-chips .pill-tag{ background:#fff; border:1px solid var(--line); padding:10px 16px; font-size:13.5px; }
+
+  @media(max-width:640px){ .lore-panel{ padding:34px 24px; } }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="brand"><span class="brand-mark"><img src="assets/logo.png" alt="Clarity" width="38" height="38"/></span><span>Clarity<small>SERVER</small></span></a>
+    <div class="nav-links">
+      <a href="index.html">Главная</a>
+      <a href="donate.html">Донат</a>
+      <a href="discord.html">Discord</a>
+      <a href="about.html">О сервере</a>
+      <a href="social.html">Соцсети</a>
+      <a href="history.html">История</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn btn-primary btn-sm" href="https://t.me/clarityminecraft" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 2.7 11.7c-1.2.5-1.2 1.2-.2 1.5l4.9 1.5 1.9 5.8c.2.6.4.8.8.8.4 0 .5-.2.8-.4l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.4-1.8-1.9-1.4ZM7.9 14.4l9.6-6c.5-.3.9-.1.6.2l-8.2 7.4-.3 3.2-1.7-4.8Z"/></svg><span class="full">Telegram</span></a>
+      <button class="nav-burger" aria-label="Меню"><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Главная</a>
+  <a href="donate.html">Донат</a>
+  <a href="discord.html">Discord</a>
+  <a href="about.html">О сервере</a>
+  <a href="social.html">Соцсети</a>
+  <a href="history.html">История</a>
+</div>
+
+<header class="page-hero">
+  <div class="container">
+    <div class="eyebrow reveal" style="margin:0 auto 20px;"><span class="dot"></span>О проекте</div>
+    <h1 class="reveal reveal-delay-1">Не просто ещё один сервер</h1>
+    <p class="reveal reveal-delay-2">Clarity живёт сезонами: ванильными и модовыми, с регулярными ивентами, своим лором и техническим фундаментом, который держит TPS стабильным даже при полном онлайне.</p>
+  </div>
+</header>
+
+<section class="container">
+
+  <div class="section-head reveal">
+    <div class="eyebrow" style="margin:0 auto 20px;"><span class="dot"></span>Формат сезонов</div>
+    <h2>Ванильные и модовые сезоны</h2>
+    <p>Мы чередуем форматы, чтобы не приедалось: часть сезонов — честный ванильный выживач, часть — с модами, новыми мобами и механиками.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card season-card reveal">
+      <div class="pill-tag">Vanilla</div>
+      <h3>Ванильный сезон</h3>
+      <p>Классический Minecraft без правок геймплея — ставка на постройки, командную работу и честное выживание без посторонних механик.</p>
+      <ul>
+        <li>Чистая ванильная генерация и мобы</li>
+        <li>Фокус на архитектуре и приватах</li>
+        <li>Оптимизация — есть, геймплей — не тронут</li>
+      </ul>
+    </div>
+    <div class="card season-card reveal reveal-delay-1">
+      <div class="pill-tag">Modded</div>
+      <h3>Модовый сезон</h3>
+      <p>Добавляем технологии, новые биомы и мобов, дополнительные механики выживания — каждый такой сезон как отдельный эксперимент.</p>
+      <ul>
+        <li>Новые мобы, ресурсы и постройки</li>
+        <li>Технологические и магические моды</li>
+        <li>Отдельный баланс и экономика под новый контент</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-head reveal" style="margin-top:88px;">
+    <div class="eyebrow" style="margin:0 auto 20px;"><span class="dot"></span>Ивенты комьюнити</div>
+    <h2>Не только выживание</h2>
+    <p>Раз в одну-две недели устраиваем тематические ивенты — от социальных игр до полного хаоса на карте.</p>
+  </div>
+
+  <div class="events-grid">
+    <div class="card reveal">
+      <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21V10l8-6 8 6v11"/><path d="M9 21v-7h6v7"/></svg></div>
+      <h3>Бункер</h3>
+      <p>Разговорная настольная игра об апокалипсисе: участники борются за места в убежище, убеждая друг друга в своей полезности.</p>
+    </div>
+    <div class="card reveal reveal-delay-1">
+      <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/><path d="M9 8h6"/></svg></div>
+      <h3>Мафия</h3>
+      <p>Классическая социальная дедукция, перенесённая в Minecraft: ночные фазы, роли и голосования всей деревней.</p>
+    </div>
+    <div class="card reveal reveal-delay-2">
+      <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div>
+      <h3>Бедварс</h3>
+      <p>Командный PvP-режим: собирайте ресурсы, укрепляйте свою кровать и уничтожайте кровати соперников, чтобы остаться последними.</p>
+    </div>
+    <div class="card reveal reveal-delay-3">
+      <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+      <h3>Не только Minecraft</h3>
+      <p>Иногда собираемся не в игре: устраиваем совместные вечера в Among Us, Gartic Phone и Roblox для всего комьюнити.</p>
+    </div>
+  </div>
+
+  <div class="lore-panel reveal" style="margin-top:88px;">
+    <div class="eyebrow"><span class="dot"></span>Лор проекта</div>
+    <h2>История первого модового сезона</h2>
+    <p>Когда-то давно, ещё до первых игроков, по этим землям бродил Альен — астральный маг, добрый и бесстрашный. На перекрёстке забытых дорог он наткнулся на Нечто: существо-тишину, в которой прятался крик, и тьму, что жаждала света. Один взгляд твари — и вся его магия иссякла в один миг.</p>
+    <p>Альен не сдался и открыл в себе новые пути магии, чтобы бросить Нечто вызов, — но тварь оказалась быстрее и наложила на весь мир проклятие замедления. Единственным спасением была победа над ней, и Альен спрятал по мирам ключи — нити, что должны были привести к нему союзников. Но времени позвать их не осталось.</p>
+    <p>Он вышел против Нечто один. Битва была недолгой — не потому, что Альен был слаб, а потому, что тварь не умела проигрывать. В последний миг он вложил в печать всю оставшуюся магию и запечатал Нечто ценой собственной жизни. Время снова потекло, проклятие ослабло — но не исчезло, а самого Нечто одолеть так и не вышло.</p>
+  </div>
+
+  <div class="section-head reveal" style="margin-top:88px;">
+    <div class="eyebrow" style="margin:0 auto 20px;"><span class="dot"></span>Под капотом</div>
+    <h2>Оптимизация — тоже часть баланса</h2>
+    <p>Красивый мир бесполезен, если сервер лагает. Поэтому техническая часть — не менее приоритетна, чем контент.</p>
+  </div>
+
+  <div class="tech-chips reveal">
+    <span class="pill-tag">Оптимизация тика мира</span>
+    <span class="pill-tag">Умная подгрузка чанков</span>
+    <span class="pill-tag">Снижение лагов от мобов</span>
+    <span class="pill-tag">Стабильный TPS при полном онлайне</span>
+    <span class="pill-tag">Быстрая генерация ландшафта</span>
+    <span class="pill-tag">Античит без потери FPS</span>
+  </div>
+
+</section>
+
+<footer style="margin-top:110px;">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="brand-mark"><img src="assets/logo.png" alt="Clarity" width="38" height="38"/></span><span>Clarity</span></div>
+        <p style="max-width:280px; font-size:14px;">Современный Minecraft-сервер для дружного комьюнити.</p>
+      </div>
+      <div class="footer-col"><h4>Проект</h4><a href="index.html">Главная</a><a href="about.html">О сервере</a><a href="history.html">История</a></div>
+      <div class="footer-col"><h4>Комьюнити</h4><a href="discord.html">Discord</a><a href="social.html">Соцсети</a><a href="donate.html">Донат</a></div>
+      <div class="footer-col"><h4>Сервер</h4><a href="https://t.me/clarityminecraft" target="_blank" rel="noopener">Telegram</a><a href="discord.html">Поддержка</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Clarity. Проект не связан с Mojang AB.</span></div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
