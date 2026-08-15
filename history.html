@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Донат — Clarity</title>
+<meta name="description" content="Тарифы привилегий Clarity — честный донат без pay-to-win."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/logo.png"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  .period-switch{
+    display:inline-flex; gap:4px; padding:5px; border-radius:var(--r-sm);
+    background:#fff; border:1px solid var(--line); margin:0 auto 36px; box-shadow:var(--shadow-sm);
+  }
+  .period-switch button{
+    padding:10px 18px; border-radius:8px; font-size:13.5px; font-weight:700; color:var(--ink-soft);
+    transition:.25s;
+  }
+  .period-switch button.active{ background:linear-gradient(135deg,var(--sand-2),var(--sand-deep)); color:var(--olive-deep); }
+  .period-wrap{ text-align:center; }
+
+  .plans{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  @media(max-width:1080px){ .plans{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:620px){ .plans{ grid-template-columns:1fr; } }
+
+  .plan{
+    position:relative; border-radius:var(--r-md); padding:24px 20px;
+    background:#fff; border:1px solid var(--line);
+    display:flex; flex-direction:column; gap:18px;
+    transition:.4s var(--ease); overflow:hidden;
+  }
+  .plan::before{
+    content:''; position:absolute; inset:0; border-radius:inherit; opacity:0;
+    background:radial-gradient(circle at 50% 0%, var(--glow,rgba(79,184,232,.35)), transparent 65%);
+    transition:opacity .4s var(--ease); pointer-events:none;
+  }
+  .plan:hover{ transform:translateY(-8px); box-shadow:0 30px 60px rgba(30,90,130,.18); border-color:transparent; }
+  .plan:hover::before{ opacity:1; }
+  .plan.feat{ border:1px solid var(--sand-deep); box-shadow:var(--shadow-glow); }
+  .plan-badge{
+    position:absolute; top:18px; right:18px; font-size:10.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
+    background:var(--deep); color:#E7F4FB; padding:5px 12px; border-radius:var(--r-pill);
+  }
+  .plan-icon{
+    width:50px; height:50px; border-radius:var(--r-sm); display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, var(--tint1,#4FB8E8), var(--tint2,#1F8FCC));
+    box-shadow:0 10px 24px rgba(31,143,204,.35);
+  }
+  .plan-icon svg{ width:26px; height:26px; color:#232B18; }
+  .plan-name{ font-size:22px; font-weight:800; }
+  .plan-price{ font-size:38px; font-weight:800; color:var(--olive-deep); line-height:1; }
+  .plan-price span{ font-size:14px; font-weight:600; color:var(--ink-soft); }
+  .plan-list{ display:flex; flex-direction:column; gap:10px; flex:1; }
+  .plan-list li{ display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--ink-soft); }
+  .plan-list svg{ width:16px; height:16px; flex-shrink:0; margin-top:2px; color:var(--sand-deep); }
+
+  /* ---------- Selectable plan cards ---------- */
+  .plan{ cursor:pointer; }
+  .plan-pick{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    padding:12px 18px; border-radius:var(--r-sm); font-weight:700; font-size:14px;
+    border:1px solid var(--line-2); color:var(--ink-soft); background:transparent;
+    transition:.25s var(--ease); pointer-events:none;
+  }
+  .plan-pick .check{
+    width:18px; height:18px; border-radius:50%; border:2px solid var(--line-2);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:.25s;
+  }
+  .plan-pick .check svg{ width:11px; height:11px; opacity:0; transition:.2s; }
+  .plan.selected{ border-color:var(--sea-deep); box-shadow:0 0 0 2px var(--sea), var(--shadow-lg); transform:translateY(-6px); }
+  .plan.selected .plan-pick{ border-color:var(--sea-deep); color:var(--sea-deep); background:rgba(46,196,182,.08); }
+  .plan.selected .plan-pick .check{ background:var(--sea-deep); border-color:var(--sea-deep); }
+  .plan.selected .plan-pick .check svg{ opacity:1; }
+
+  /* ---------- Order / purchase panel ---------- */
+  .order-panel{
+    margin-top:24px; padding:22px; display:grid;
+    grid-template-columns:1.3fr 1fr auto; gap:24px; align-items:end;
+    transition:box-shadow .3s var(--ease), border-color .3s var(--ease);
+  }
+  .order-panel.ready{ border:1px solid var(--sea-deep); box-shadow:0 0 0 2px rgba(46,196,182,.18), var(--shadow-lg); }
+  .order-field label, .order-info span.order-label{
+    display:block; font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-faint); margin-bottom:10px;
+  }
+  .order-selected{ display:flex; align-items:center; gap:12px; min-height:44px; }
+  .order-empty{ color:var(--ink-faint); font-size:14.5px; }
+  .order-selected-icon{
+    width:40px; height:40px; border-radius:12px; flex-shrink:0;
+    background:linear-gradient(135deg, var(--tint1,#4FB8E8), var(--tint2,#1F8FCC));
+    display:flex; align-items:center; justify-content:center;
+  }
+  .order-selected-icon svg{ width:19px; height:19px; color:#232B18; }
+  .order-selected-text b{ display:block; font-size:16.5px; }
+  .order-selected-text span{ font-size:13px; color:var(--ink-soft); }
+  .order-field input{
+    width:100%; padding:12px 14px; border-radius:var(--r-sm); border:1px solid var(--line-2);
+    font-family:inherit; font-size:15px; font-weight:600; color:var(--ink);
+    background:#fff; transition:.25s;
+  }
+  .order-field input:focus{ outline:none; border-color:var(--sea-deep); box-shadow:0 0 0 3px rgba(46,196,182,.15); }
+  .order-panel button.btn{ min-width:150px; }
+  .order-panel button.btn:disabled{ opacity:.45; cursor:not-allowed; transform:none !important; box-shadow:none !important; }
+  @media(max-width:820px){ .order-panel{ grid-template-columns:1fr; align-items:stretch; } }
+
+  .donate-note{
+    max-width:760px; margin:48px auto 0; text-align:center; padding:26px;
+  }
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:40px; }
+  @media(max-width:760px){ .steps{ grid-template-columns:1fr; } }
+  .step{ text-align:center; padding:20px; }
+  .step-num{ width:36px; height:36px; border-radius:50%; background:var(--deep); color:#E7F4FB; display:flex; align-items:center; justify-content:center; font-weight:800; margin:0 auto 16px; }
+
+  @media(max-width:640px){
+    .plans{ gap:12px; }
+    .plan{ padding:20px 18px; }
+    .order-panel{ padding:18px; gap:16px; }
+    .donate-note{ margin-top:32px; padding:20px; }
+    .steps{ margin-bottom:28px; gap:12px; }
+    .step{ padding:16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"><img src="assets/logo.png" alt="Clarity" width="38" height="38"/></span>
+      <span>Clarity<small>SERVER</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Главная</a>
+      <a href="donate.html">Донат</a>
+      <a href="discord.html">Discord</a>
+      <a href="about.html">О сервере</a>
+      <a href="social.html">Соцсети</a>
+      <a href="history.html">История</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn btn-primary btn-sm" href="https://t.me/clarityminecraft" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 2.7 11.7c-1.2.5-1.2 1.2-.2 1.5l4.9 1.5 1.9 5.8c.2.6.4.8.8.8.4 0 .5-.2.8-.4l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.4-1.8-1.9-1.4ZM7.9 14.4l9.6-6c.5-.3.9-.1.6.2l-8.2 7.4-.3 3.2-1.7-4.8Z"/></svg><span class="full">Telegram</span></a>
+      <button class="nav-burger" aria-label="Меню"><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Главная</a>
+  <a href="donate.html">Донат</a>
+  <a href="discord.html">Discord</a>
+  <a href="about.html">О сервере</a>
+  <a href="social.html">Соцсети</a>
+  <a href="history.html">История</a>
+</div>
+
+<header class="page-hero">
+  <div class="container">
+    <div class="eyebrow reveal" style="margin:0 auto 20px;"><span class="dot"></span>Честный донат</div>
+    <h1 class="reveal reveal-delay-1">Поддержите Clarity</h1>
+    <p class="reveal reveal-delay-2">Привилегии дают эстетику, удобство и косметику — никакого преимущества в бою или добыче ресурсов.</p>
+  </div>
+</header>
+
+<section class="container">
+  <div class="steps">
+    <div class="step glass reveal">
+      <div class="step-num">1</div>
+      <h3 style="margin-bottom:8px;">Выберите тариф</h3>
+      <p style="color:var(--ink-soft); font-size:14px;">Определитесь с привилегией и сроком действия.</p>
+    </div>
+    <div class="step glass reveal reveal-delay-1">
+      <div class="step-num">2</div>
+      <h3 style="margin-bottom:8px;">Укажите ник</h3>
+      <p style="color:var(--ink-soft); font-size:14px;">Введите игровой никнейм при оплате — привилегия придёт автоматически.</p>
+    </div>
+    <div class="step glass reveal reveal-delay-2">
+      <div class="step-num">3</div>
+      <h3 style="margin-bottom:8px;">Заходите на сервер</h3>
+      <p style="color:var(--ink-soft); font-size:14px;">Выдача происходит мгновенно после подтверждения оплаты.</p>
+    </div>
+  </div>
+
+  <div class="period-wrap reveal">
+    <div class="period-switch">
+      <button data-period="30" class="active">30 дней</button>
+      <button data-period="60">60 дней</button>
+      <button data-period="90">90 дней</button>
+      <button data-period="180">180 дней</button>
+    </div>
+  </div>
+
+  <div class="plans">
+    <div class="plan reveal" data-plan="beachgoer" data-plan-name="Пляжник" style="--tint1:#D3EFFB;--tint2:#1F8FCC;--glow:rgba(79,184,232,.25)">
+      <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg></div>
+      <div class="plan-name">Пляжник</div>
+      <div class="plan-price"><span>от&nbsp;</span><span data-price data-price-30="99₽" data-price-60="173₽" data-price-90="238₽" data-price-180="416₽">99₽</span><span> / <span data-days-label>30 дней</span></span></div>
+      <ul class="plan-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 1</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 2</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 3</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 4</li>
+      </ul>
+      <div class="plan-pick"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="pick-text">Выбрать</span></div>
+    </div>
+
+    <div class="plan reveal reveal-delay-1" data-plan="surfer" data-plan-name="Сёрфер" style="--tint1:#8FE0D6;--tint2:#1B8A8F;--glow:rgba(46,196,182,.25)">
+      <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 8c2-2.4 4-2.4 6 0s4 2.4 6 0 4-2.4 6 0M2 14c2-2.4 4-2.4 6 0s4 2.4 6 0 4-2.4 6 0M2 20c2-2.4 4-2.4 6 0s4 2.4 6 0 4-2.4 6 0"/></svg></div>
+      <div class="plan-name">Сёрфер</div>
+      <div class="plan-price"><span>от&nbsp;</span><span data-price data-price-30="199₽" data-price-60="348₽" data-price-90="478₽" data-price-180="836₽">199₽</span><span> / <span data-days-label>30 дней</span></span></div>
+      <ul class="plan-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 1</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 2</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 3</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 4</li>
+      </ul>
+      <div class="plan-pick"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="pick-text">Выбрать</span></div>
+    </div>
+
+    <div class="plan feat reveal reveal-delay-2" data-plan="lifeguard" data-plan-name="Спасатель" style="--tint1:#A3DFF5;--tint2:#1F8FCC;--glow:rgba(79,184,232,.4)">
+      <div class="plan-badge">Популярный</div>
+      <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/><path d="M12 3v5.2M12 15.8V21M3 12h5.2M15.8 12H21M5.6 5.6l3.7 3.7M14.7 14.7l3.7 3.7M18.4 5.6l-3.7 3.7M9.3 14.7l-3.7 3.7"/></svg></div>
+      <div class="plan-name">Спасатель</div>
+      <div class="plan-price"><span>от&nbsp;</span><span data-price data-price-30="349₽" data-price-60="611₽" data-price-90="838₽" data-price-180="1466₽">349₽</span><span> / <span data-days-label>30 дней</span></span></div>
+      <ul class="plan-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 1</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 2</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 3</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 4</li>
+      </ul>
+      <div class="plan-pick"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="pick-text">Выбрать</span></div>
+    </div>
+
+    <div class="plan reveal reveal-delay-3" data-plan="captain" data-plan-name="Капитан" style="--tint1:#232B18;--tint2:#3E4A2F;--glow:rgba(35,43,24,.25)">
+      <div class="plan-icon" style="background:linear-gradient(135deg,#3E4A2F,#232B18)"><svg viewBox="0 0 24 24" fill="none" stroke="#FF7A5C" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="5" r="2.2"/><path d="M12 7.2V20M6 13a6 6 0 0 0 12 0M6 13H4M18 13h2"/></svg></div>
+      <div class="plan-name">Капитан</div>
+      <div class="plan-price"><span>от&nbsp;</span><span data-price data-price-30="599₽" data-price-60="1048₽" data-price-90="1438₽" data-price-180="2516₽">599₽</span><span> / <span data-days-label>30 дней</span></span></div>
+      <ul class="plan-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 1</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 2</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 3</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 4</li>
+      </ul>
+      <div class="plan-pick"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="pick-text">Выбрать</span></div>
+    </div>
+  </div>
+
+  <div class="order-panel glass reveal" id="orderPanel">
+    <div class="order-info">
+      <span class="order-label">Ваш выбор</span>
+      <div class="order-selected" id="orderSelected">
+        <span class="order-empty">Выберите привилегию выше ↑</span>
+      </div>
+    </div>
+    <div class="order-field">
+      <label for="nickInput">Ник на сервере</label>
+      <input type="text" id="nickInput" placeholder="Steve228" maxlength="16" autocomplete="off">
+    </div>
+    <button class="btn btn-primary" id="buyBtn" disabled>Купить</button>
+  </div>
+
+  <div class="donate-note glass reveal">
+    <p style="font-size:14.5px; color:var(--ink-soft);">Оплачивая привилегию, вы поддерживаете развитие Clarity: аренду серверов, разработку уникальных механик и организацию ивентов. Донат — это благодарность проекту, а не игровое преимущество.</p>
+  </div>
+</section>
+
+<footer style="margin-top:110px;">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="brand-mark"><img src="assets/logo.png" alt="Clarity" width="38" height="38"/></span><span>Clarity</span></div>
+        <p style="max-width:280px; font-size:14px;">Современный Minecraft-сервер для дружного комьюнити.</p>
+      </div>
+      <div class="footer-col"><h4>Проект</h4><a href="index.html">Главная</a><a href="about.html">О сервере</a><a href="history.html">История</a></div>
+      <div class="footer-col"><h4>Комьюнити</h4><a href="discord.html">Discord</a><a href="social.html">Соцсети</a><a href="donate.html">Донат</a></div>
+      <div class="footer-col"><h4>Сервер</h4><a href="https://t.me/clarityminecraft" target="_blank" rel="noopener">Telegram</a><a href="discord.html">Поддержка</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Clarity. Проект не связан с Mojang AB.</span></div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

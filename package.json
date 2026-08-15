@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Clarity — уютный Minecraft-сервер для дружного комьюнити</title>
+<meta name="description" content="Clarity — современный Minecraft-сервер для дружного комьюнити. Минимализм, честный премиум-донат, регулярные ивенты."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/logo.png"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  .hero{ padding:150px 0 70px; overflow:hidden; }
+  .hero-inner{ text-align:center; position:relative; z-index:2; }
+  .hero h1{
+    font-size:clamp(50px,10vw,128px);
+    line-height:.94; letter-spacing:-.02em;
+    background:linear-gradient(180deg, #0a0a0a 0%, #2b2b2b 55%, #1a1a1a 100%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    margin-bottom:16px;
+  }
+  .hero-sub{ font-size:17px; color:var(--ink-soft); max-width:560px; margin:0 auto 28px; }
+  .hero-cta{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .hero-ip{ font-family:monospace; font-weight:700; }
+
+  @media(max-width:640px){
+    .hero{ padding:118px 0 48px; }
+    .hero h1{ margin-bottom:12px; }
+    .hero-sub{ margin-bottom:22px; }
+  }
+
+  .dune-scene{ position:absolute; inset:0; z-index:0; pointer-events:none; }
+  .dune-layer{
+    position:absolute; left:-10%; right:-10%;
+    height:220px; border-radius:50%;
+  }
+  .dune-1{ bottom:-120px; background:radial-gradient(ellipse at 50% 50%, rgba(79,184,232,.35), transparent 70%); filter:blur(10px); }
+  .dune-2{ bottom:-170px; background:radial-gradient(ellipse at 40% 50%, rgba(31,143,204,.28), transparent 70%); }
+
+  .hero-stats{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    max-width:920px; margin:0 auto; position:relative; z-index:2;
+    background:var(--line); border-radius:var(--r-lg); overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .hero-stat{ background:rgba(255,255,255,.7); backdrop-filter:blur(14px); padding:26px 14px; text-align:center; }
+  .hero-stat b{ display:block; font-size:30px; font-weight:800; color:var(--olive-deep); }
+  .hero-stat span{ font-size:12.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.08em; }
+  @media(max-width:700px){ .hero-stats{ grid-template-columns:repeat(2,1fr); } }
+
+  .features-section{ padding:76px 0; }
+  .biome-strip{
+    display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:60px;
+  }
+  .biome-chip{
+    display:inline-flex; align-items:center; gap:8px;
+    background:#fff; border:1px solid var(--line); padding:9px 18px;
+    border-radius:var(--r-pill); font-size:13.5px; font-weight:600; color:var(--ink-soft);
+    transition:.25s;
+  }
+  .biome-chip:hover{ border-color:var(--sand-deep); color:var(--olive-deep); transform:translateY(-2px); box-shadow:var(--shadow-sm); }
+  .biome-chip .sq{ width:8px; height:8px; border-radius:2px; }
+
+  .explore-section{ padding:50px 0 80px; }
+  .explore-grid{ display:flex; flex-wrap:wrap; justify-content:center; gap:22px; }
+  .explore-card{
+    display:flex; flex-direction:column; gap:14px;
+    flex:0 1 calc((100% - 44px)/3);
+    padding:30px; border-radius:var(--r-lg);
+    background:linear-gradient(155deg, rgba(255,255,255,.85), rgba(253,249,239,.6));
+    border:1px solid var(--line);
+    transition:.4s var(--ease);
+  }
+  .explore-card:hover{ transform:translateY(-6px); border-color:var(--sand-deep); box-shadow:var(--shadow-lg); }
+  .explore-card h3{ font-size:18px; }
+  .explore-card p{ font-size:15px; color:var(--ink-soft); flex:1; }
+  .explore-arrow{ display:inline-flex; align-items:center; gap:6px; font-size:13.5px; font-weight:700; color:var(--olive); }
+  @media(max-width:960px){ .explore-card{ flex:0 1 calc((100% - 22px)/2); } }
+  @media(max-width:640px){ .explore-card{ flex:0 1 100%; } }
+
+  .why-band{
+    position:relative; margin:0 0 -1px;
+    background:linear-gradient(180deg, transparent, var(--bg-sand-2) 30%);
+    padding-top:10px;
+  }
+
+  @media(max-width:640px){
+    .features-section{ padding:48px 0; }
+    .explore-section{ padding:36px 0 56px; }
+    .explore-grid{ gap:14px; }
+    .explore-card{ padding:22px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">
+        <img src="assets/logo.png" alt="Clarity" width="38" height="38"/>
+      </span>
+      <span>Clarity<small>SERVER</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Главная</a>
+      <a href="donate.html">Донат</a>
+      <a href="discord.html">Discord</a>
+      <a href="about.html">О сервере</a>
+      <a href="social.html">Соцсети</a>
+      <a href="history.html">История</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn btn-primary btn-sm" href="https://t.me/clarityminecraft" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 2.7 11.7c-1.2.5-1.2 1.2-.2 1.5l4.9 1.5 1.9 5.8c.2.6.4.8.8.8.4 0 .5-.2.8-.4l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.4-1.8-1.9-1.4ZM7.9 14.4l9.6-6c.5-.3.9-.1.6.2l-8.2 7.4-.3 3.2-1.7-4.8Z"/></svg>
+        <span class="full">Telegram</span>
+      </a>
+      <button class="nav-burger" aria-label="Меню"><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu">
+  <a href="index.html">Главная</a>
+  <a href="donate.html">Донат</a>
+  <a href="discord.html">Discord</a>
+  <a href="about.html">О сервере</a>
+  <a href="social.html">Соцсети</a>
+  <a href="history.html">История</a>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="dune-scene">
+    <div class="dune-blob" style="width:420px;height:420px;top:60px;left:-140px;background:var(--sand);opacity:.28;"></div>
+    <div class="dune-blob" style="width:360px;height:360px;top:120px;right:-120px;background:var(--olive);opacity:.10;"></div>
+  </div>
+  <div class="container hero-inner">
+    <div class="eyebrow reveal"><span class="dot"></span>Сезон 1</div>
+    <h1 class="reveal reveal-delay-1">CLARITY</h1>
+    <p class="hero-sub reveal reveal-delay-2">Дом для игроков, которые любят проводить время вместе: исследовать мир, создавать масштабные проекты, заводить новых друзей и просто наслаждаться игрой.</p>
+    <div class="hero-cta reveal reveal-delay-3">
+      <a href="https://t.me/clarityminecraft" target="_blank" rel="noopener" class="btn btn-primary">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 2.7 11.7c-1.2.5-1.2 1.2-.2 1.5l4.9 1.5 1.9 5.8c.2.6.4.8.8.8.4 0 .5-.2.8-.4l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.4-1.8-1.9-1.4ZM7.9 14.4l9.6-6c.5-.3.9-.1.6.2l-8.2 7.4-.3 3.2-1.7-4.8Z"/></svg>
+        Наш Telegram
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- WHY CLARITY -->
+<section class="why-band">
+  <div class="features-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" style="margin:0 auto 20px;"><span class="dot"></span>Почему именно Clarity</div>
+        <h2>Сервер, собранный без лишнего</h2>
+        <p>пример текста</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card reveal">
+          <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 20h18M5 20 12 4l7 16M9 20l3-7 3 7"/></svg></div>
+          <h3>Пример текста</h3>
+          <p>Пример текста для описания карточки — здесь появится финальный текст, который расскажет об этой особенности сервера чуть подробнее.</p>
+        </div>
+        <div class="card reveal reveal-delay-1">
+          <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+          <h3>Пример текста</h3>
+          <p>Пример текста для описания карточки — здесь появится финальный текст, который расскажет об этой особенности сервера чуть подробнее.</p>
+        </div>
+        <div class="card reveal reveal-delay-2">
+          <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></div>
+          <h3>Пример текста</h3>
+          <p>Пример текста для описания карточки — здесь появится финальный текст, который расскажет об этой особенности сервера чуть подробнее.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+          <h3>Пример текста</h3>
+          <p>Пример текста для описания карточки — здесь появится финальный текст, который расскажет об этой особенности сервера чуть подробнее.</p>
+        </div>
+        <div class="card reveal reveal-delay-1">
+          <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div>
+          <h3>Пример текста</h3>
+          <p>Пример текста для описания карточки — здесь появится финальный текст, который расскажет об этой особенности сервера чуть подробнее.</p>
+        </div>
+        <div class="card reveal reveal-delay-2">
+          <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M3 12h18" stroke-linecap="round"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <h3>Пример текста</h3>
+          <p>Пример текста для описания карточки — здесь появится финальный текст, который расскажет об этой особенности сервера чуть подробнее.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPLORE OTHER PAGES -->
+<section class="explore-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="margin:0 auto 20px;"><span class="dot"></span>Изучите проект</div>
+      <h2>Куда двигаться дальше</h2>
+      <p>Всё, что нужно знать о Clarity — донат, комьюнити и путь развития проекта.</p>
+    </div>
+    <div class="explore-grid">
+      <a href="donate.html" class="explore-card reveal">
+        <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>Донат</h3>
+        <p>Тарифы привилегий с честными бонусами и красивой визуализацией.</p>
+        <span class="explore-arrow">Перейти →</span>
+      </a>
+      <a href="https://t.me/clarityminecraft" target="_blank" rel="noopener" class="explore-card reveal reveal-delay-1">
+        <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21.9 4.3 2.7 11.7c-1.2.5-1.2 1.2-.2 1.5l4.9 1.5 1.9 5.8c.2.6.4.8.8.8.4 0 .5-.2.8-.4l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.4-1.8-1.9-1.4ZM7.9 14.4l9.6-6c.5-.3.9-.1.6.2l-8.2 7.4-.3 3.2-1.7-4.8Z"/></svg></div>
+        <h3>Telegram</h3>
+        <p>Присоединяйтесь к комьюнити — новости, ивенты, поддержка.</p>
+        <span class="explore-arrow">Перейти →</span>
+      </a>
+      <a href="discord.html" class="explore-card reveal reveal-delay-2">
+        <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></div>
+        <h3>Discord</h3>
+        <p>Присоединяйтесь к комьюнити — ивенты, розыгрыши, поддержка.</p>
+        <span class="explore-arrow">Перейти →</span>
+      </a>
+      <a href="about.html" class="explore-card reveal reveal-delay-2">
+        <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>О сервере</h3>
+        <p>Особенности, механики и всё, что делает Clarity уникальным.</p>
+        <span class="explore-arrow">Перейти →</span>
+      </a>
+      <a href="social.html" class="explore-card reveal">
+        <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6 15.4 6.4M8.6 13.4l6.8 4.2"/></svg></div>
+        <h3>Соцсети</h3>
+        <p>Discord, Telegram, YouTube, TikTok — будьте в курсе новостей.</p>
+        <span class="explore-arrow">Перейти →</span>
+      </a>
+      <a href="history.html" class="explore-card reveal reveal-delay-1">
+        <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>История</h3>
+        <p>Таймлайн развития проекта — все ключевые вехи Clarity.</p>
+        <span class="explore-arrow">Перейти →</span>
+      </a>
+    </div>
+
+    <div class="reveal" style="max-width:380px; margin:56px auto 0; text-align:center; padding:26px 24px; border-radius:var(--r-lg); background:linear-gradient(135deg, var(--sand-2), var(--sand-deep)); color:var(--olive-deep);">
+      <h3 style="margin-bottom:6px; font-size:17px;">Готовы начать?</h3>
+      <p style="color:var(--olive-deep); opacity:.8; font-size:13.5px;">Все детали и вход — в нашем Telegram.</p>
+      <a class="btn btn-dark btn-sm" href="https://t.me/clarityminecraft" target="_blank" rel="noopener" style="margin-top:12px;">Перейти в Telegram</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <span class="brand-mark"><img src="assets/logo.png" alt="Clarity" width="38" height="38"/></span>
+          <span>Clarity</span>
+        </div>
+        <p style="max-width:280px; font-size:14px;">Сервер Minecraft с дружным коллективом и классными механиками. Место, где интересно играть и легко найти своих.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Проект</h4>
+        <a href="index.html">Главная</a>
+        <a href="about.html">О сервере</a>
+        <a href="history.html">История</a>
+      </div>
+      <div class="footer-col">
+        <h4>Комьюнити</h4>
+        <a href="discord.html">Discord</a>
+        <a href="social.html">Соцсети</a>
+        <a href="donate.html">Донат</a>
+      </div>
+      <div class="footer-col">
+        <h4>Сервер</h4>
+        <a href="https://t.me/clarityminecraft" target="_blank" rel="noopener">Telegram</a>
+        <a href="https://t.me/clarityminecraft" target="_blank" rel="noopener">Поддержка</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Clarity. Проект не связан с Mojang AB.</span>
+      
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
