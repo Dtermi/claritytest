@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Ивенты — Clarity</title>
+<meta name="description" content="Ивенты Clarity — что уже проходило на сервере."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/logo.png"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  .events-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+  @media(max-width:760px){ .events-grid{ grid-template-columns:1fr; } }
+
+  .event-card{
+    border-radius:var(--r-lg);
+    overflow:hidden;
+    background:#fff;
+    border:1px solid var(--line);
+    box-shadow:var(--shadow-md);
+    transition:.35s var(--ease);
+  }
+  .event-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+  .event-photo{
+    width:100%; aspect-ratio:16/9; object-fit:cover; display:block;
+  }
+  .event-body{ padding:22px 24px 26px; }
+  .event-body h3{ font-size:19px; margin-bottom:8px; }
+  .event-body p{ font-size:14.5px; color:var(--ink-soft); line-height:1.55; }
+
+  @media(max-width:640px){
+    .events-grid{ gap:16px; }
+    .event-body{ padding:18px 20px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="brand"><span class="brand-mark"><img src="assets/logo.png" alt="Clarity" width="38" height="38"/></span><span>Clarity<small>SERVER</small></span></a>
+    <div class="nav-links">
+      <a href="index.html">Главная</a>
+      <a href="donate.html">Донат</a>
+      <a href="discord.html">Discord</a>
+      <a href="about.html">О сервере</a>
+      <a href="social.html">Соцсети</a>
+      <a href="events.html">Ивенты</a>
+      <a href="apply.html">Заявка</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn btn-primary btn-sm" href="https://t.me/clarityminecraft" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 2.7 11.7c-1.2.5-1.2 1.2-.2 1.5l4.9 1.5 1.9 5.8c.2.6.4.8.8.8.4 0 .5-.2.8-.4l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.4-1.8-1.9-1.4ZM7.9 14.4l9.6-6c.5-.3.9-.1.6.2l-8.2 7.4-.3 3.2-1.7-4.8Z"/></svg><span class="full">Telegram</span></a>
+      <button class="nav-burger" aria-label="Меню"><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Главная</a>
+  <a href="donate.html">Донат</a>
+  <a href="discord.html">Discord</a>
+  <a href="about.html">О сервере</a>
+  <a href="social.html">Соцсети</a>
+  <a href="events.html">Ивенты</a>
+  <a href="apply.html">Заявка</a>
+</div>
+
+<header class="page-hero">
+  <div class="container">
+    <div class="eyebrow reveal" style="margin:0 auto 20px;"><span class="dot"></span>Жизнь сервера</div>
+    <h1 class="reveal reveal-delay-1">Ивенты Clarity</h1>
+    <p class="reveal reveal-delay-2">Регулярно устраиваем активности для всего комьюнити — вот что уже успело пройти.</p>
+  </div>
+</header>
+
+<section class="container" style="padding:20px 0 90px;">
+  <div class="events-grid">
+    <div class="event-card reveal">
+      <img class="event-photo" src="assets/events/bunker.png" alt="Ивент Бункер"/>
+      <div class="event-body">
+        <h3>Бункер</h3>
+        <p>Совместный ролевой ивент — игроки собрались в укрытии, чтобы пережить праздник вместе. Подробное описание добавим позже.</p>
+      </div>
+    </div>
+    <div class="event-card reveal reveal-delay-1">
+      <img class="event-photo" src="assets/events/bedwars.png" alt="Ивент Бедварс"/>
+      <div class="event-body">
+        <h3>Бедварс</h3>
+        <p>Командный PvP-турнир: собирайте ресурсы, защищайте свою кровать и выбивайте соперников. Подробное описание добавим позже.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="margin-top:0;">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="brand-mark"><img src="assets/logo.png" alt="Clarity" width="38" height="38"/></span><span>Clarity</span></div>
+        <p style="max-width:280px; font-size:14px;">Современный Minecraft-сервер для дружного комьюнити.</p>
+      </div>
+      <div class="footer-col"><h4>Проект</h4><a href="index.html">Главная</a><a href="about.html">О сервере</a><a href="events.html">Ивенты</a><a href="apply.html">Заявка</a></div>
+      <div class="footer-col"><h4>Комьюнити</h4><a href="discord.html">Discord</a><a href="social.html">Соцсети</a><a href="donate.html">Донат</a></div>
+      <div class="footer-col"><h4>Сервер</h4><a href="https://t.me/clarityminecraft" target="_blank" rel="noopener">Telegram</a><a href="discord.html">Поддержка</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Clarity. Проект не связан с Mojang AB.</span></div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -84,11 +84,47 @@
     padding-top:10px;
   }
 
+  /* NEWS / SOCIAL BAND */
+  .news-section{ padding:56px 0 100px; }
+  .news-card{
+    position:relative; overflow:hidden;
+    max-width:620px; margin:0 auto; text-align:center;
+    padding:56px 32px; border-radius:var(--r-lg);
+    background:linear-gradient(155deg, rgba(255,255,255,.85), rgba(253,249,239,.6));
+    border:1px solid var(--line);
+  }
+  .news-card::before{
+    content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:radial-gradient(circle at 50% -10%, rgba(79,184,232,.16), transparent 60%);
+  }
+  .news-card > *{ position:relative; z-index:1; }
+  .news-card .eyebrow{ margin:0 auto 18px; }
+  .news-card h2{ margin-bottom:10px; }
+  .news-card p{ color:var(--ink-soft); font-size:15px; max-width:400px; margin:0 auto 34px; }
+  .news-socials{ display:flex; gap:20px; justify-content:center; flex-wrap:wrap; }
+  .news-social{
+    width:62px; height:62px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:#fff; border:1px solid var(--line);
+    box-shadow:var(--shadow-sm);
+    color:var(--olive-deep);
+    transition:.3s var(--ease);
+  }
+  .news-social svg{ width:24px; height:24px; fill:currentColor; display:block; }
+  .news-social:hover{
+    transform:translateY(-5px) scale(1.06);
+    box-shadow:var(--shadow-glow);
+    border-color:var(--sand-deep);
+    background:linear-gradient(135deg, var(--sand-2), var(--sand-deep));
+    color:#fff;
+  }
+
   @media(max-width:640px){
     .features-section{ padding:48px 0; }
-    .explore-section{ padding:36px 0 56px; }
-    .explore-grid{ gap:14px; }
-    .explore-card{ padding:22px; }
+    .news-section{ padding:32px 0 60px; }
+    .news-card{ padding:38px 20px; }
+    .news-social{ width:54px; height:54px; }
+    .news-social svg{ width:21px; height:21px; }
   }
 </style>
 </head>
@@ -108,7 +144,7 @@
       <a href="discord.html">Discord</a>
       <a href="about.html">О сервере</a>
       <a href="social.html">Соцсети</a>
-      <a href="history.html">История</a>
+      <a href="events.html">Ивенты</a>
       <a href="apply.html">Заявка</a>
     </div>
     <div class="nav-actions">
@@ -127,7 +163,7 @@
   <a href="discord.html">Discord</a>
   <a href="about.html">О сервере</a>
   <a href="social.html">Соцсети</a>
-  <a href="history.html">История</a>
+      <a href="events.html">Ивенты</a>
   <a href="apply.html">Заявка</a>
 </div>
 
@@ -197,57 +233,24 @@
   </div>
 </section>
 
-<!-- EXPLORE OTHER PAGES -->
-<section class="explore-section">
+<!-- NEWS / SOCIALS -->
+<section class="news-section">
   <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow" style="margin:0 auto 20px;"><span class="dot"></span>Изучите проект</div>
-      <h2>Куда двигаться дальше</h2>
-      <p>Всё, что нужно знать о Clarity — донат, комьюнити и путь развития проекта.</p>
-    </div>
-    <div class="explore-grid">
-      <a href="donate.html" class="explore-card reveal">
-        <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <h3>Донат</h3>
-        <p>Тарифы привилегий с честными бонусами и красивой визуализацией.</p>
-        <span class="explore-arrow">Перейти →</span>
-      </a>
-      <a href="https://t.me/clarityminecraft" target="_blank" rel="noopener" class="explore-card reveal reveal-delay-1">
-        <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21.9 4.3 2.7 11.7c-1.2.5-1.2 1.2-.2 1.5l4.9 1.5 1.9 5.8c.2.6.4.8.8.8.4 0 .5-.2.8-.4l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.4-1.8-1.9-1.4ZM7.9 14.4l9.6-6c.5-.3.9-.1.6.2l-8.2 7.4-.3 3.2-1.7-4.8Z"/></svg></div>
-        <h3>Telegram</h3>
-        <p>Присоединяйтесь к комьюнити — новости, ивенты, поддержка.</p>
-        <span class="explore-arrow">Перейти →</span>
-      </a>
-      <a href="discord.html" class="explore-card reveal reveal-delay-2">
-        <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></div>
-        <h3>Discord</h3>
-        <p>Присоединяйтесь к комьюнити — ивенты, розыгрыши, поддержка.</p>
-        <span class="explore-arrow">Перейти →</span>
-      </a>
-      <a href="about.html" class="explore-card reveal reveal-delay-2">
-        <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg></div>
-        <h3>О сервере</h3>
-        <p>Особенности, механики и всё, что делает Clarity уникальным.</p>
-        <span class="explore-arrow">Перейти →</span>
-      </a>
-      <a href="social.html" class="explore-card reveal">
-        <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6 15.4 6.4M8.6 13.4l6.8 4.2"/></svg></div>
-        <h3>Соцсети</h3>
-        <p>Discord, Telegram, YouTube, TikTok — будьте в курсе новостей.</p>
-        <span class="explore-arrow">Перейти →</span>
-      </a>
-      <a href="history.html" class="explore-card reveal reveal-delay-1">
-        <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-        <h3>История</h3>
-        <p>Таймлайн развития проекта — все ключевые вехи Clarity.</p>
-        <span class="explore-arrow">Перейти →</span>
-      </a>
-    </div>
-
-    <div class="reveal" style="max-width:380px; margin:56px auto 0; text-align:center; padding:26px 24px; border-radius:var(--r-lg); background:linear-gradient(135deg, var(--sand-2), var(--sand-deep)); color:var(--olive-deep);">
-      <h3 style="margin-bottom:6px; font-size:17px;">Готовы начать?</h3>
-      <p style="color:var(--olive-deep); opacity:.8; font-size:13.5px;">Все детали и вход — в нашем Telegram.</p>
-      <a class="btn btn-dark btn-sm" href="https://t.me/clarityminecraft" target="_blank" rel="noopener" style="margin-top:12px;">Перейти в Telegram</a>
+    <div class="news-card reveal">
+      <div class="eyebrow"><span class="dot"></span>Оставайся на связи</div>
+      <h2>Не упусти важные новости</h2>
+      <p>Анонсы, ивенты и жизнь сервера — там, где тебе удобно следить.</p>
+      <div class="news-socials">
+        <a href="https://t.me/clarityminecraft" target="_blank" rel="noopener" class="news-social" aria-label="Telegram">
+          <svg viewBox="0 0 24 24"><path d="M21.9 4.3 2.7 11.7c-1.2.5-1.2 1.2-.2 1.5l4.9 1.5 1.9 5.8c.2.6.4.8.8.8.4 0 .5-.2.8-.4l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.4-1.8-1.9-1.4ZM7.9 14.4l9.6-6c.5-.3.9-.1.6.2l-8.2 7.4-.3 3.2-1.7-4.8Z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@clarityminecraft0" target="_blank" rel="noopener" class="news-social" aria-label="TikTok">
+          <svg viewBox="0 0 24 24"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48Z"/></svg>
+        </a>
+        <a href="https://t.me/clarityminecraft" target="_blank" rel="noopener" class="news-social" aria-label="Discord">
+          <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.075.075 0 0 0-.079.037c-.21.375-.445.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.028C.533 9.046-.319 13.58.099 18.058a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.891.076.076 0 0 0-.04.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.029 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.674-3.548-13.66a.061.061 0 0 0-.031-.03ZM8.02 15.33c-1.183 0-2.157-1.086-2.157-2.42 0-1.333.956-2.418 2.157-2.418 1.211 0 2.176 1.095 2.157 2.419 0 1.333-.956 2.42-2.157 2.42Zm7.975 0c-1.183 0-2.157-1.086-2.157-2.42 0-1.333.955-2.418 2.157-2.418 1.211 0 2.176 1.095 2.157 2.419 0 1.333-.946 2.42-2.157 2.42Z"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -266,7 +269,7 @@
         <h4>Проект</h4>
         <a href="index.html">Главная</a>
         <a href="about.html">О сервере</a>
-        <a href="history.html">История</a>
+      <a href="events.html">Ивенты</a>
       </div>
       <div class="footer-col">
         <h4>Комьюнити</h4>
