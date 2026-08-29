@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Донат — Clarity</title>
-<meta name="description" content="Тарифы привилегий Clarity — честный донат без pay-to-win."/>
+<title>Донаты и проходка — Clarity</title>
+<meta name="description" content="Тарифы привилегий, поддержка команды и проходка на сервер Clarity — честный донат без pay-to-win."/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="icon" href="assets/logo.png"/>
@@ -130,7 +130,6 @@
     <div class="nav-links">
       <a href="index.html">Главная</a>
       <a href="donate.html">Донат</a>
-      <a href="discord.html">Discord</a>
       <a href="about.html">О сервере</a>
       <a href="social.html">Соцсети</a>
       <a href="events.html">Ивенты</a>
@@ -145,7 +144,6 @@
 <div class="mobile-menu">
   <a href="index.html">Главная</a>
   <a href="donate.html">Донат</a>
-  <a href="discord.html">Discord</a>
   <a href="about.html">О сервере</a>
   <a href="social.html">Соцсети</a>
       <a href="events.html">Ивенты</a>
@@ -154,7 +152,7 @@
 
 <header class="page-hero">
   <div class="container">
-    <div class="eyebrow reveal" style="margin:0 auto 20px;"><span class="dot"></span>Честный донат</div>
+    <div class="eyebrow reveal" style="margin:0 auto 20px;"><span class="dot"></span>Донаты и проходка</div>
     <h1 class="reveal reveal-delay-1">Поддержите Clarity</h1>
     <p class="reveal reveal-delay-2">Привилегии дают эстетику, удобство и косметику — никакого преимущества в бою или добыче ресурсов.</p>
   </div>
@@ -177,6 +175,12 @@
       <h3 style="margin-bottom:8px;">Заходите на сервер</h3>
       <p style="color:var(--ink-soft); font-size:14px;">Выдача происходит мгновенно после подтверждения оплаты.</p>
     </div>
+  </div>
+
+  <div class="section-head reveal" style="margin-bottom:36px;">
+    <div class="eyebrow" style="margin:0 auto 20px;"><span class="dot"></span>Донаты</div>
+    <h2>Саппортер</h2>
+    <p>Выберите привилегию, которая ближе всего по духу — она даёт эстетику и удобство, а не преимущество в игре.</p>
   </div>
 
   <div class="period-wrap reveal">
@@ -254,6 +258,31 @@
   </div><div class="donate-note glass reveal">
     <p style="font-size:14.5px; color:var(--ink-soft);">Оплачивая привилегию, вы поддерживаете развитие Clarity: аренду серверов, разработку уникальных механик и организацию ивентов. Донат — это благодарность проекту, а не игровое преимущество.</p>
   </div>
+
+  <div class="section-head reveal" style="margin-top:90px;">
+    <div class="eyebrow" style="margin:0 auto 20px;"><span class="dot"></span>Ещё способы поддержать</div>
+    <h2>Поддержать команду и проходка</h2>
+    <p>Не хотите привилегию, но хотите поддержать проект — или просто ищете проходку на сервер? Вот ещё два варианта.</p>
+  </div>
+
+  <div class="grid-2 reveal" style="align-items:stretch;">
+    <div class="card glass" style="text-align:center; display:flex; flex-direction:column; align-items:center;">
+      <div class="icon-tile" style="margin-bottom:16px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-8-4.6-8-11.2C4 6 6.6 4 9.2 4 10.7 4 12 4.8 12 4.8S13.3 4 14.8 4C17.4 4 20 6 20 9.8 20 16.4 12 21 12 21Z"/></svg></div>
+      <h3>Поддержать команду</h3>
+      <p style="color:var(--ink-soft); font-size:14.5px; max-width:360px;">Мы ценим любой взнос. Для нашей команды невероятно приятна ваша поддержка — благодаря вам мы двигаемся дальше!</p>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:20px; width:100%;">
+        <input type="number" min="1" id="customAmount" placeholder="Сумма, ₽" style="flex:1; min-width:120px; max-width:160px; padding:12px 14px; border-radius:var(--r-sm); border:1px solid var(--line-2); font-family:inherit; font-size:15px; font-weight:600; color:var(--ink); background:#fff;">
+        <button class="btn btn-primary" id="customDonateBtn">Поддержать</button>
+      </div>
+    </div>
+
+    <div class="card glass" style="text-align:center; display:flex; flex-direction:column; align-items:center;">
+      <div class="icon-tile" style="margin-bottom:16px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+      <h3>Проходка</h3>
+      <div class="pill-tag" style="margin:6px 0 12px;">Сейчас бесплатно</div>
+      <p style="color:var(--ink-soft); font-size:14.5px; max-width:360px;">Пока проходка на сервер выдаётся бесплатно. В будущем её стоимость составит 100₽.</p>
+    </div>
+  </div>
 </section>
 
 <footer style="margin-top:110px;">
@@ -266,13 +295,29 @@
       <div class="footer-col"><h4>Проект</h4><a href="index.html">Главная</a><a href="about.html">О сервере</a>
       <a href="events.html">Ивенты</a>
       <a href="apply.html">Заявка</a></div>
-      <div class="footer-col"><h4>Комьюнити</h4><a href="discord.html">Discord</a><a href="social.html">Соцсети</a><a href="donate.html">Донат</a></div>
-      <div class="footer-col"><h4>Сервер</h4><a href="https://t.me/clarityminecraft" target="_blank" rel="noopener">Telegram</a><a href="discord.html">Поддержка</a></div>
+      <div class="footer-col"><h4>Комьюнити</h4><a href="social.html">Соцсети</a><a href="donate.html">Донат</a></div>
+      <div class="footer-col"><h4>Сервер</h4><a href="https://t.me/clarityminecraft" target="_blank" rel="noopener">Telegram</a><a href="https://t.me/clarityminecraft" target="_blank" rel="noopener">Поддержка</a></div>
     </div>
     <div class="footer-bottom"><span>© 2026 Clarity. Проект не связан с Mojang AB.</span></div>
   </div>
 </footer>
 
 <script src="script.js"></script>
+<script>
+  (function(){
+    var btn = document.getElementById('customDonateBtn');
+    var input = document.getElementById('customAmount');
+    if (!btn || !input) return;
+    btn.addEventListener('click', function(){
+      var amount = parseFloat(input.value);
+      if (!amount || amount <= 0) {
+        input.focus();
+        if (window.clarityToast) window.clarityToast('Укажите сумму поддержки');
+        return;
+      }
+      if (window.clarityToast) window.clarityToast('Спасибо! Напишите нам в Telegram, чтобы отправить ' + amount + '₽');
+    });
+  })();
+</script>
 </body>
 </html>
