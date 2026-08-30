@@ -1,5 +1,7 @@
 import express from 'express';
 import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { RefreshingAuthProvider } from '@donation-alerts/auth';
 import { ApiClient } from '@donation-alerts/api';
 import { UserEventsClient } from '@donation-alerts/events';
@@ -121,23 +123,31 @@ async function startListening(userId) {
   console.log(`🎧 Слушаю донаты пользователя DonationAlerts #${userId}`);
 }
 
-// ---------- Веб-сервер: страница входа + OAuth callback ----------
+// ---------- Веб-сервер: сам сайт (public/) + служебная страница входа DonationAlerts ----------
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
-app.get('/', (req, res) => {
+// Сам сайт (index.html, donate.html, style.css, assets/ и т.д.) отдаётся с этого же
+// Railway-домена. Служебные страницы ниже (/donationalerts, /health) обрабатываются
+// раньше, поэтому не конфликтуют с файлами сайта.
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Страница входа/статуса моста DonationAlerts → Discord — теперь по отдельному
+// адресу, чтобы не перекрывать главную страницу сайта.
+app.get('/donationalerts', (req, res) => {
   const saved = loadSavedUser();
   if (saved) {
     res.send(`
       <h1>✅ Бот подключён</h1>
       <p>Слушаю донаты пользователя DonationAlerts ID ${saved.userId}.</p>
-      <p><a href="/reauth">Переавторизоваться</a> (если нужно подключить другой аккаунт)</p>
+      <p><a href="/donationalerts/reauth">Переавторизоваться</a> (если нужно подключить другой аккаунт)</p>
     `);
     return;
   }
   res.send(loginPage());
 });
 
-app.get('/reauth', (req, res) => {
+app.get('/donationalerts/reauth', (req, res) => {
   res.send(loginPage());
 });
 
@@ -155,7 +165,7 @@ function loginPage() {
   `;
 }
 
-app.get('/callback', async (req, res) => {
+app.get('/donationalerts/callback', async (req, res) => {
   const { code, error } = req.query;
   if (error) {
     res.status(400).send(`Ошибка авторизации от DonationAlerts: ${error}`);
@@ -176,7 +186,7 @@ app.get('/callback', async (req, res) => {
       .status(500)
       .send(
         `Не получилось обменять код на токен: ${err.message}. ` +
-          `Скорее всего, код уже устарел (живёт пару минут) — вернись на <a href="/">главную</a> и попробуй снова.`,
+          `Скорее всего, код уже устарел (живёт пару минут) — вернись на <a href="/donationalerts">страницу входа</a> и попробуй снова.`,
       );
   }
 });

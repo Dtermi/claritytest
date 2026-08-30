@@ -1,7 +1,7 @@
 {
-  "name": "da-discord-bridge",
+  "name": "eternity-site",
   "version": "1.0.0",
-  "description": "Слушает подтверждённые донаты DonationAlerts и шлёт их в Discord webhook",
+  "description": "Сайт Eternity + мост DonationAlerts → Discord (слушает подтверждённые донаты и шлёт их в Discord webhook)",
   "main": "index.js",
   "type": "module",
   "engines": {

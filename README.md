@@ -1,9 +1,13 @@
-# DonationAlerts → Discord мост для Eternity
+# Сайт Eternity + мост DonationAlerts → Discord
 
-Маленький сервис, который слушает **подтверждённые DonationAlerts** донаты и
-шлёт их в Discord-канал через вебхук. Никогда не доверяет кнопке "Купить" на
-сайте — сообщение в Discord уходит только когда реальный донат подтверждён
-самим DonationAlerts.
+Один сервис на Railway одновременно:
+- отдаёт сам сайт (папка `public/` — index.html, donate.html, style.css и т.д.);
+- слушает **подтверждённые DonationAlerts** донаты и шлёт их в Discord-канал
+  через вебхук.
+
+Никогда не доверяет кнопке "Купить"/"Поддержать" на сайте — та лишь открывает
+страницу оплаты DonationAlerts. Сообщение в Discord уходит только когда
+реальный донат подтверждён самим DonationAlerts (это делает `index.js`).
 
 ## Что нужно перед запуском
 
@@ -25,25 +29,36 @@
 
 3. **Узнай публичный адрес сервиса.** В Railway: Settings → Networking →
    Generate Domain. Получится что-то вроде
-   `https://da-discord-bridge-production.up.railway.app`.
+   `https://eternity-production.up.railway.app`. Открыв этот адрес в браузере,
+   ты увидишь сам сайт (index.html) — это нормально, так и должно быть.
 
 4. **Заполни переменные окружения** (Railway → Variables), по образцу файла
    `.env.example`:
    - `DA_CLIENT_ID` — из личного кабинета DonationAlerts
    - `DA_CLIENT_SECRET` — оттуда же
-   - `DA_REDIRECT_URI` — твой домен из шага 3 + `/callback`, например
-     `https://da-discord-bridge-production.up.railway.app/callback`
+   - `DA_REDIRECT_URI` — твой домен из шага 3 + `/donationalerts/callback`,
+     например `https://eternity-production.up.railway.app/donationalerts/callback`
    - `DISCORD_WEBHOOK_URL` — ссылка вебхука Discord
    - `SPONSOR_PRICE=100` и `SUPPORT_MIN_PRICE=30` — можно оставить как есть
 
 5. **Обнови Redirect URI в самом DonationAlerts.** Зайди в
    https://www.donationalerts.com/application/clients, открой своё
-   приложение и замени временный `http://localhost:8000/callback` на
-   тот же адрес, что вписал в `DA_REDIRECT_URI` на шаге 4.
+   приложение и замени временный/несуществующий Redirect URI на тот же адрес,
+   что вписал в `DA_REDIRECT_URI` на шаге 4 (обязательно `/donationalerts/callback`,
+   должны совпадать один в один, вплоть до `https://` и слэшей).
 
-6. **Открой свой домен из шага 3 в браузере** и нажми «Войти через
-   DonationAlerts». Разреши доступ — тебя перекинет обратно, и появится
-   «✅ Готово!». С этого момента бот слушает донаты постоянно.
+6. **Открой `<твой домен>/donationalerts` в браузере** (не просто главную
+   страницу — там сайт, а страница входа для бота теперь по этому отдельному
+   адресу) и нажми «Войти через DonationAlerts». Разреши доступ — тебя
+   перекинет обратно, и появится «✅ Готово!». С этого момента бот слушает
+   донаты постоянно.
+
+7. **Впиши своё имя DonationAlerts на сайте.** Открой `public/script.js`,
+   найди строку `const DONATIONALERTS_USERNAME = "eternityminecraft";` в самом
+   начале файла и замени `eternityminecraft` на имя из своей ссылки на
+   странице доната — `https://www.donationalerts.com/r/ВОТ-ЭТО-ИМЯ`. Без этого
+   кнопки «Купить» и «Поддержать» будут открывать чужую/несуществующую
+   страницу оплаты.
 
 ## Как проверить, что работает
 
