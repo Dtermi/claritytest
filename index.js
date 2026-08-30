@@ -176,7 +176,36 @@ app.get('/donationalerts/callback', async (req, res) => {
     return;
   }
   try {
-    const tokenWithUserId = await authProvider.addUserForCode(code);
+    // Обмениваем code на токен НАПРЯМУЮ через API DonationAlerts (POST-запросом),
+    // а не через authProvider.addUserForCode — в библиотеке @donation-alerts/auth
+    // этот метод в некоторых версиях уходит в HTTP-клиент как GET с телом запроса,
+    // а это запрещено спецификацией fetch ("Request with GET/HEAD method cannot
+    // have body"). Ручной POST-запрос этого бага не имеет.
+    const tokenRes = await fetch('https://www.donationalerts.com/oauth/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        grant_type: 'authorization_code',
+        client_id: DA_CLIENT_ID,
+        client_secret: DA_CLIENT_SECRET,
+        redirect_uri: DA_REDIRECT_URI,
+        code,
+      }),
+    });
+
+    const tokenData = await tokenRes.json();
+    if (!tokenRes.ok || !tokenData.access_token) {
+      throw new Error(tokenData.message || tokenData.error || `DonationAlerts вернул ${tokenRes.status}`);
+    }
+
+    const tokenWithUserId = await authProvider.addUserForToken({
+      accessToken: tokenData.access_token,
+      refreshToken: tokenData.refresh_token,
+      expiresIn: tokenData.expires_in ?? 0,
+      obtainmentTimestamp: Date.now(),
+      scopes: (tokenData.scope || SCOPES.join(' ')).split(' '),
+    });
+
     saveUser(tokenWithUserId.userId, tokenWithUserId);
     await startListening(tokenWithUserId.userId);
     res.send(`<h1>✅ Готово!</h1><p>Бот подключён и уже слушает донаты. Можешь закрыть эту страницу.</p>`);

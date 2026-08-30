@@ -4,7 +4,7 @@
 
 // ЗАМЕНИ на имя из своей ссылки на странице доната DonationAlerts:
 // https://www.donationalerts.com/r/ВОТ-ЭТО-ИМЯ
-const DONATIONALERTS_USERNAME = "eternityminecraft";
+const DONATIONALERTS_USERNAME = "eternityprojectmine";
 
 // Открывает страницу оплаты DonationAlerts с подставленной суммой и комментарием
 // (тариф + игровой ник) — DonationAlerts не знает про тарифы сайта напрямую,
