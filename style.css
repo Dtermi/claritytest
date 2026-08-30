@@ -323,7 +323,7 @@ footer{
 footer::before{
   content:'';
   position:absolute; top:-1px; left:0; right:0; height:6px;
-  background:linear-gradient(90deg, var(--sand), var(--sea), var(--sand-deep), var(--sand-2));
+  background:linear-gradient(90deg, var(--sand), var(--sand-deep), var(--sand), var(--sand-2));
 }
 .footer-grid{
   display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px;
@@ -507,8 +507,8 @@ footer::before{
   font-size:14px; font-weight:600; padding:13px 16px;
   border-radius:var(--r-sm); display:none; margin-top:14px;
 }
-.admin-form-status.ok{ display:block; background:rgba(46,196,182,.12); border:1px solid rgba(46,196,182,.35); color:var(--sea-deep); }
-.admin-form-status.err{ display:block; background:rgba(255,122,92,.12); border:1px solid rgba(255,122,92,.35); color:#C64A32; }
+.admin-form-status.ok{ background:rgba(46,196,182,.12); border:1px solid rgba(46,196,182,.35); color:var(--sea-deep); }
+.admin-form-status.err{ background:rgba(255,122,92,.12); border:1px solid rgba(255,122,92,.35); color:#C64A32; }
 
 @media(max-width:640px){
   .admin-modal{ padding:28px 22px; }

@@ -50,8 +50,8 @@
     font-size:14px; font-weight:600; padding:13px 16px;
     border-radius:var(--r-sm); display:none;
   }
-  .form-status.ok{ display:block; background:rgba(46,196,182,.12); border:1px solid rgba(46,196,182,.35); color:var(--sea-deep); }
-  .form-status.err{ display:block; background:rgba(255,122,92,.12); border:1px solid rgba(255,122,92,.35); color:#C64A32; }
+  .form-status.ok{ background:rgba(46,196,182,.12); border:1px solid rgba(46,196,182,.35); color:var(--sea-deep); }
+  .form-status.err{ background:rgba(255,122,92,.12); border:1px solid rgba(255,122,92,.35); color:#C64A32; }
 
   .apply-note{
     max-width:720px; margin:22px auto 0; text-align:center;
@@ -209,7 +209,7 @@
 
       <button type="submit" class="btn btn-primary btn-block" id="submitBtn">Отправить заявку</button>
       <div class="form-status ok" id="statusOk">Заявка отправлена! Мы свяжемся с тобой в ближайшее время.</div>
-      <div class="form-status err" id="statusErr">Не получилось отправить заявку. Попробуй ещё раз или напиши нам в Discord.</div>
+      <div class="form-status err" id="statusErr">Не получилось отправить заявку. Попробуй ещё раз.</div>
     </form>
   </div>
   <p class="apply-note">Заявки читает команда Eternity — обычно отвечаем в течение 1–2 дней.</p>

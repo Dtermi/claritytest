@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <button type="submit" class="btn btn-primary" id="adminSubmitBtn">Отправить заявку</button>
             </div>
             <div class="admin-form-status ok" id="adminStatusOk">Заявка отправлена! Мы свяжемся с тобой в ближайшее время.</div>
-            <div class="admin-form-status err" id="adminStatusErr">Не получилось отправить заявку. Попробуй ещё раз или напиши нам в Discord.</div>
+            <div class="admin-form-status err" id="adminStatusErr">Не получилось отправить заявку. Попробуй ещё раз.</div>
           </form>
         </div>
 
