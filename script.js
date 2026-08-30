@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CLARITY — shared front-end logic
+   ETERNITY — shared front-end logic
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <input type="text" id="adminQ7" placeholder="@username или email" required>
             </div>
 
-            <div class="admin-trial-note">Отправляя заявку, вы соглашаетесь на испытательный срок от 5 до 14 дней. С уважением, администрация Clarity!</div>
+            <div class="admin-trial-note">Отправляя заявку, вы соглашаетесь на испытательный срок от 5 до 14 дней. С уважением, администрация Eternity!</div>
 
             <div class="admin-step-actions">
               <button type="button" class="btn btn-ghost" id="adminBackToDiscord">← Назад</button>
@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ];
 
       const payload = {
-        username: "Заявки на админа Clarity",
+        username: "Заявки на админа Eternity",
         embeds: [{
           title: "Новая заявка на админа",
           description: "Отправляя заявку, пользователь согласился на испытательный срок 5–14 дней.",

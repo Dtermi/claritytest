@@ -78,7 +78,7 @@ async function handleDonation(evt) {
   const tariff = currency === 'RUB' ? detectTariff(amount) : null;
 
   const payload = {
-    username: 'Донаты Clarity',
+    username: 'Донаты Eternity',
     embeds: [
       {
         title: tariff ? '✅ Подтверждённый донат' : '💸 Донат (сумма ниже минимального тарифа)',
@@ -151,7 +151,7 @@ function loginPage() {
   return `
     <h1>Бот не подключён</h1>
     <p>Нажми кнопку ниже и разреши доступ своему аккаунту DonationAlerts:</p>
-    <p><a href="${authorizeUrl}" style="display:inline-block;padding:12px 20px;background:#1F8FCC;color:#fff;border-radius:8px;text-decoration:none;font-weight:700;">Войти через DonationAlerts</a></p>
+    <p><a href="${authorizeUrl}" style="display:inline-block;padding:12px 20px;background:#7B2FBF;color:#fff;border-radius:8px;text-decoration:none;font-weight:700;">Войти через DonationAlerts</a></p>
   `;
 }
 

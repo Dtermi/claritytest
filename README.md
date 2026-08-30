@@ -1,4 +1,4 @@
-# DonationAlerts → Discord мост для Clarity
+# DonationAlerts → Discord мост для Eternity
 
 Маленький сервис, который слушает **подтверждённые DonationAlerts** донаты и
 шлёт их в Discord-канал через вебхук. Никогда не доверяет кнопке "Купить" на

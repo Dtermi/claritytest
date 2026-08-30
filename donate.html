@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Донаты и проходка — Clarity</title>
-<meta name="description" content="Тарифы привилегий, поддержка команды и проходка на сервер Clarity — честный донат без pay-to-win."/>
+<title>Донаты и проходка — Eternity</title>
+<meta name="description" content="Тарифы привилегий, поддержка команды и проходка на сервер Eternity — честный донат без pay-to-win."/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="icon" href="assets/logo.png"/>
@@ -33,19 +33,19 @@
   }
   .plan::before{
     content:''; position:absolute; inset:0; border-radius:inherit; opacity:0;
-    background:radial-gradient(circle at 50% 0%, var(--glow,rgba(79,184,232,.35)), transparent 65%);
+    background:radial-gradient(circle at 50% 0%, var(--glow,rgba(155,93,229,.35)), transparent 65%);
     transition:opacity .4s var(--ease); pointer-events:none;
   }
-  .plan:hover{ transform:translateY(-8px); box-shadow:0 30px 60px rgba(30,90,130,.18); border-color:transparent; }
+  .plan:hover{ transform:translateY(-8px); box-shadow:0 30px 60px rgba(90,30,130,.18); border-color:transparent; }
   .plan:hover::before{ opacity:1; }
   .plan.feat{ border:1px solid var(--sand-deep); box-shadow:var(--shadow-glow); }
   .plan-badge{
     position:absolute; top:18px; right:18px; font-size:10.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
-    background:var(--deep); color:#E7F4FB; padding:5px 12px; border-radius:var(--r-pill);
+    background:var(--deep); color:#F1E4FB; padding:5px 12px; border-radius:var(--r-pill);
   }
   .plan-icon{
     width:50px; height:50px; border-radius:var(--r-sm); display:flex; align-items:center; justify-content:center;
-    background:linear-gradient(135deg, var(--tint1,#4FB8E8), var(--tint2,#1F8FCC));
+    background:linear-gradient(135deg, var(--tint1,#9B5DE5), var(--tint2,#7B2FBF));
     box-shadow:0 10px 24px rgba(31,143,204,.35);
   }
   .plan-icon svg{ width:26px; height:26px; color:#232B18; }
@@ -87,7 +87,7 @@
   .order-empty{ color:var(--ink-faint); font-size:14.5px; }
   .order-selected-icon{
     width:40px; height:40px; border-radius:12px; flex-shrink:0;
-    background:linear-gradient(135deg, var(--tint1,#4FB8E8), var(--tint2,#1F8FCC));
+    background:linear-gradient(135deg, var(--tint1,#9B5DE5), var(--tint2,#7B2FBF));
     display:flex; align-items:center; justify-content:center;
   }
   .order-selected-icon svg{ width:19px; height:19px; color:#232B18; }
@@ -109,7 +109,7 @@
   .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:40px; }
   @media(max-width:760px){ .steps{ grid-template-columns:1fr; } }
   .step{ text-align:center; padding:20px; }
-  .step-num{ width:36px; height:36px; border-radius:50%; background:var(--deep); color:#E7F4FB; display:flex; align-items:center; justify-content:center; font-weight:800; margin:0 auto 16px; }
+  .step-num{ width:36px; height:36px; border-radius:50%; background:var(--deep); color:#F1E4FB; display:flex; align-items:center; justify-content:center; font-weight:800; margin:0 auto 16px; }
 
   @media(max-width:640px){
     .plans{ gap:12px; }
@@ -124,8 +124,8 @@
 <body><nav class="navbar">
   <div class="container nav-inner">
     <a href="index.html" class="brand">
-      <span class="brand-mark"><img src="assets/logo.png" alt="Clarity" width="38" height="38"/></span>
-      <span>Clarity<small>SERVER</small></span>
+      <span class="brand-mark"><img src="assets/logo.png" alt="Eternity" width="38" height="38"/></span>
+      <span>Eternity<small>SERVER</small></span>
     </a>
     <div class="nav-links">
       <a href="index.html">Главная</a>
@@ -153,7 +153,7 @@
 <header class="page-hero">
   <div class="container">
     <div class="eyebrow reveal" style="margin:0 auto 20px;"><span class="dot"></span>Донаты и проходка</div>
-    <h1 class="reveal reveal-delay-1">Поддержите Clarity</h1>
+    <h1 class="reveal reveal-delay-1">Поддержите Eternity</h1>
     <p class="reveal reveal-delay-2">Привилегии дают эстетику, удобство и косметику — никакого преимущества в бою или добыче ресурсов.</p>
   </div>
 </header>
@@ -185,7 +185,7 @@
 
   <div class="grid-2 reveal" style="align-items:start; max-width:900px; margin:0 auto;">
 
-    <div class="plan feat" data-plan="sponsor" data-plan-name="Спонсор" style="--tint1:#A3DFF5;--tint2:#1F8FCC;--glow:rgba(79,184,232,.4)">
+    <div class="plan feat" data-plan="sponsor" data-plan-name="Спонсор" style="--tint1:#D9C2F0;--tint2:#7B2FBF;--glow:rgba(155,93,229,.4)">
       <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/><path d="M12 3v5.2M12 15.8V21M3 12h5.2M15.8 12H21M5.6 5.6l3.7 3.7M14.7 14.7l3.7 3.7M18.4 5.6l-3.7 3.7M9.3 14.7l-3.7 3.7"/></svg></div>
       <div class="plan-name">Спонсор</div>
       <div class="plan-price" data-price="100₽">100₽</div>
@@ -223,7 +223,7 @@
     </div>
     <button class="btn btn-primary" id="buyBtn" disabled>Купить</button>
   </div><div class="donate-note glass reveal">
-    <p style="font-size:14.5px; color:var(--ink-soft);">Оплачивая привилегию, вы поддерживаете развитие Clarity: аренду серверов, разработку уникальных механик и организацию ивентов. Донат — это благодарность проекту, а не игровое преимущество.</p>
+    <p style="font-size:14.5px; color:var(--ink-soft);">Оплачивая привилегию, вы поддерживаете развитие Eternity: аренду серверов, разработку уникальных механик и организацию ивентов. Донат — это благодарность проекту, а не игровое преимущество.</p>
   </div>
 
   <div class="donate-note glass reveal" style="margin-top:24px; max-width:640px;">
@@ -235,7 +235,7 @@
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="footer-brand"><span class="brand-mark"><img src="assets/logo.png" alt="Clarity" width="38" height="38"/></span><span>Clarity</span></div>
+        <div class="footer-brand"><span class="brand-mark"><img src="assets/logo.png" alt="Eternity" width="38" height="38"/></span><span>Eternity</span></div>
         <p style="max-width:280px; font-size:14px;">Современный Minecraft-сервер для дружного комьюнити.</p>
       </div>
       <div class="footer-col"><h4>Проект</h4><a href="index.html">Главная</a><a href="about.html">О сервере</a>
@@ -244,7 +244,7 @@
       <div class="footer-col"><h4>Комьюнити</h4><a href="social.html">Соцсети</a><a href="donate.html">Донат</a></div>
       <div class="footer-col"><h4>Сервер</h4><a href="https://t.me/clarityminecraft" target="_blank" rel="noopener">Telegram</a><a href="https://t.me/clarityminecraft" target="_blank" rel="noopener">Поддержка</a></div>
     </div>
-    <div class="footer-bottom"><span>© 2026 Clarity. Проект не связан с Mojang AB.</span></div>
+    <div class="footer-bottom"><span>© 2026 Eternity. Проект не связан с Mojang AB.</span></div>
   </div>
 </footer>
 
