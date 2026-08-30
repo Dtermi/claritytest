@@ -108,23 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---------- Donate period toggle ---------- */
-  const periodButtons = document.querySelectorAll('.period-switch [data-period]');
-  if (periodButtons.length) {
-    const priceEls = document.querySelectorAll('[data-price]');
-    const applyPeriod = (period) => {
-      periodButtons.forEach(b => b.classList.toggle('active', b.dataset.period === period));
-      priceEls.forEach(el => {
-        const price = el.dataset[`price${period}`] || el.getAttribute(`data-price-${period}`);
-        if (price) el.textContent = price;
-      });
-      document.querySelectorAll('[data-days-label]').forEach(el => {
-        el.textContent = period + ' дней';
-      });
-    };
-    periodButtons.forEach(b => b.addEventListener('click', () => applyPeriod(b.dataset.period)));
-  }
-
   /* ---------- Donate: pick a privilege, enter nick, buy ---------- */
   const planEls = document.querySelectorAll('.plan[data-plan]');
   const orderPanel = document.getElementById('orderPanel');
@@ -134,23 +117,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const buyBtn = document.getElementById('buyBtn');
     let selectedPlan = null;
 
-    const currentPeriod = () =>
-      document.querySelector('.period-switch [data-period].active')?.dataset.period || '30';
-
     const renderSelected = () => {
       if (!selectedPlan) {
         orderSelected.innerHTML = `<span class="order-empty">Выберите привилегию выше ↑</span>`;
         return;
       }
-      const period = currentPeriod();
       const priceEl = selectedPlan.querySelector('[data-price]');
-      const price = priceEl ? (priceEl.dataset[`price${period}`] || priceEl.textContent) : '';
+      const price = priceEl ? priceEl.textContent : '';
       const iconHtml = selectedPlan.querySelector('.plan-icon').innerHTML;
       const tint1 = selectedPlan.style.getPropertyValue('--tint1');
       const tint2 = selectedPlan.style.getPropertyValue('--tint2');
       orderSelected.innerHTML = `
         <span class="order-selected-icon" style="--tint1:${tint1};--tint2:${tint2}">${iconHtml}</span>
-        <span class="order-selected-text"><b>${selectedPlan.dataset.planName}</b><span>${price} / ${period} дней</span></span>`;
+        <span class="order-selected-text"><b>${selectedPlan.dataset.planName}</b><span>${price}</span></span>`;
     };
 
     const updateBuyState = () => {
@@ -177,8 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (buyBtn.disabled) return;
       window.clarityToast(`«${selectedPlan.dataset.planName}» для ${nickInput.value.trim()} — переходим к оплате`);
     });
-
-    periodButtons.forEach(b => b.addEventListener('click', () => { if (selectedPlan) renderSelected(); }));
   }
 
   /* ---------- "Стать админом" — плавающая кнопка + модалка ---------- */

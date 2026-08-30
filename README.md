@@ -1,19 +1,65 @@
-{
-  "name": "clarity-donate-shop",
-  "version": "1.0.0",
-  "description": "Clarity — Minecraft desert-server donate shop with DonationAlerts + RCON + LuckPerms",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "dev":   "nodemon server.js"
-  },
-  "dependencies": {
-    "better-sqlite3": "^9.4.3",
-    "dotenv":         "^16.4.5",
-    "express":        "^4.19.2",
-    "rcon-client":    "^4.3.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.0"
-  }
-}
+# DonationAlerts → Discord мост для Clarity
+
+Маленький сервис, который слушает **подтверждённые DonationAlerts** донаты и
+шлёт их в Discord-канал через вебхук. Никогда не доверяет кнопке "Купить" на
+сайте — сообщение в Discord уходит только когда реальный донат подтверждён
+самим DonationAlerts.
+
+## Что нужно перед запуском
+
+- Аккаунт на [GitHub](https://github.com)
+- Аккаунт на [Railway](https://railway.app) (вход через GitHub)
+- Приложение, созданное на https://www.donationalerts.com/application/clients
+  (там же есть `Client ID` и `Client Secret`)
+- Discord-вебхук: в настройках канала → Интеграции → Вебхуки → Создать вебхук
+  → скопировать ссылку
+
+## Шаги запуска
+
+1. **Залей эту папку на GitHub.** Создай новый репозиторий (можно приватный)
+   и загрузи все файлы (кнопка "Add file → Upload files" в браузере, без
+   командной строки).
+
+2. **Разверни на Railway.** New Project → Deploy from GitHub repo → выбери
+   этот репозиторий. Railway сам увидит `package.json` и запустит `npm start`.
+
+3. **Узнай публичный адрес сервиса.** В Railway: Settings → Networking →
+   Generate Domain. Получится что-то вроде
+   `https://da-discord-bridge-production.up.railway.app`.
+
+4. **Заполни переменные окружения** (Railway → Variables), по образцу файла
+   `.env.example`:
+   - `DA_CLIENT_ID` — из личного кабинета DonationAlerts
+   - `DA_CLIENT_SECRET` — оттуда же
+   - `DA_REDIRECT_URI` — твой домен из шага 3 + `/callback`, например
+     `https://da-discord-bridge-production.up.railway.app/callback`
+   - `DISCORD_WEBHOOK_URL` — ссылка вебхука Discord
+   - `SPONSOR_PRICE=100` и `SUPPORT_MIN_PRICE=30` — можно оставить как есть
+
+5. **Обнови Redirect URI в самом DonationAlerts.** Зайди в
+   https://www.donationalerts.com/application/clients, открой своё
+   приложение и замени временный `http://localhost:8000/callback` на
+   тот же адрес, что вписал в `DA_REDIRECT_URI` на шаге 4.
+
+6. **Открой свой домен из шага 3 в браузере** и нажми «Войти через
+   DonationAlerts». Разреши доступ — тебя перекинет обратно, и появится
+   «✅ Готово!». С этого момента бот слушает донаты постоянно.
+
+## Как проверить, что работает
+
+Сделай тестовый донат самому себе на минимальную сумму (или попроси кого-то
+задонатить пару рублей с комментарием) — в Discord-канале должно появиться
+сообщение с пометкой "✅ Подтверждённый донат" или "💸 Донат (сумма ниже
+минимального тарифа)".
+
+## Важные ограничения (честно, как есть)
+
+- Сумма и тариф определяются **только по сумме доната**, DonationAlerts не
+  знает про тарифы твоего сайта. Если хочешь точнее различать «Спонсор» и
+  «Поддержать команду», попроси донатеров писать тариф и ник в комментарии —
+  это придёт в поле `Комментарий` в Discord, и модератор сверяет вручную.
+- Токен сохраняется в файл `tokens.json` рядом со скриптом. Если Railway
+  пересоберёт контейнер с нуля (redeploy), файл может обнулиться — тогда
+  просто зайди на свой домен и нажми «Войти через DonationAlerts» ещё раз.
+  Для полной надёжности можно подключить Railway Volume (постоянное
+  хранилище) — это уже необязательный шаг для продвинутых.

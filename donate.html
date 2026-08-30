@@ -180,21 +180,15 @@
   <div class="section-head reveal" style="margin-bottom:36px;">
     <div class="eyebrow" style="margin:0 auto 20px;"><span class="dot"></span>Донаты</div>
     <h2>Два способа поддержать</h2>
-    <p>«Саппортер» — привилегия с эстетикой и удобством. «Поддержать команду» — донат любой суммой, без привилегий.</p>
+    <p>«Спонсор» — привилегия с эстетикой и удобством. «Поддержать команду» — донат любой суммой, без привилегий.</p>
   </div>
 
   <div class="grid-2 reveal" style="align-items:start; max-width:900px; margin:0 auto;">
 
-    <div class="plan feat" data-plan="supporter" data-plan-name="Саппортер" style="--tint1:#A3DFF5;--tint2:#1F8FCC;--glow:rgba(79,184,232,.4)">
+    <div class="plan feat" data-plan="sponsor" data-plan-name="Спонсор" style="--tint1:#A3DFF5;--tint2:#1F8FCC;--glow:rgba(79,184,232,.4)">
       <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/><path d="M12 3v5.2M12 15.8V21M3 12h5.2M15.8 12H21M5.6 5.6l3.7 3.7M14.7 14.7l3.7 3.7M18.4 5.6l-3.7 3.7M9.3 14.7l-3.7 3.7"/></svg></div>
-      <div class="plan-name">Саппортер</div>
-      <div class="period-switch" style="margin:0 0 4px;">
-        <button data-period="30" class="active">30 дней</button>
-        <button data-period="60">60 дней</button>
-        <button data-period="90">90 дней</button>
-        <button data-period="180">180 дней</button>
-      </div>
-      <div class="plan-price"><span>от&nbsp;</span><span data-price data-price-30="199₽" data-price-60="348₽" data-price-90="478₽" data-price-180="836₽">199₽</span><span> / <span data-days-label>30 дней</span></span></div>
+      <div class="plan-name">Спонсор</div>
+      <div class="plan-price" data-price="100₽">100₽</div>
       <ul class="plan-list">
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 1</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Пример текста 2</li>
@@ -209,7 +203,7 @@
       <h3>Поддержать команду</h3>
       <p style="color:var(--ink-soft); font-size:14.5px; max-width:320px; flex:1;">Мы ценим любой взнос. Впишите любую сумму — для нашей команды невероятно приятна ваша поддержка, благодаря вам мы двигаемся дальше!</p>
       <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:20px; width:100%;">
-        <input type="number" min="1" id="customAmount" placeholder="Сумма, ₽" style="flex:1; min-width:120px; max-width:160px; padding:12px 14px; border-radius:var(--r-sm); border:1px solid var(--line-2); font-family:inherit; font-size:15px; font-weight:600; color:var(--ink); background:#fff;">
+        <input type="number" min="30" id="customAmount" placeholder="Сумма, ₽ (от 30)" style="flex:1; min-width:120px; max-width:160px; padding:12px 14px; border-radius:var(--r-sm); border:1px solid var(--line-2); font-family:inherit; font-size:15px; font-weight:600; color:var(--ink); background:#fff;">
         <button class="btn btn-primary" id="customDonateBtn">Поддержать</button>
       </div>
     </div>
@@ -262,9 +256,9 @@
     if (!btn || !input) return;
     btn.addEventListener('click', function(){
       var amount = parseFloat(input.value);
-      if (!amount || amount <= 0) {
+      if (!amount || amount < 30) {
         input.focus();
-        if (window.clarityToast) window.clarityToast('Укажите сумму поддержки');
+        if (window.clarityToast) window.clarityToast('Минимальная сумма поддержки — 30₽');
         return;
       }
       if (window.clarityToast) window.clarityToast('Спасибо! Напишите нам в Telegram, чтобы отправить ' + amount + '₽');
