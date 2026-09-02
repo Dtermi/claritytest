@@ -171,12 +171,17 @@
       </div>
 
       <div class="field">
-        <label for="age"><span class="q-num">2.</span>Ваш возраст</label>
+        <label for="discordUser"><span class="q-num">2.</span>Ваш юз в Discord</label>
+        <input type="text" id="discordUser" name="Юз в Discord" placeholder="eternity_player" required>
+      </div>
+
+      <div class="field">
+        <label for="age"><span class="q-num">3.</span>Ваш возраст</label>
         <input type="number" id="age" name="Возраст" min="1" max="100" placeholder="16" required>
       </div>
 
       <div class="field">
-        <label for="source"><span class="q-num">3.</span>Как вы нас нашли?</label>
+        <label for="source"><span class="q-num">4.</span>Как вы нас нашли?</label>
         <select id="source" name="Как нашли" required>
           <option value="" disabled selected>Выбери вариант</option>
           <option value="Discord">Discord</option>
@@ -190,17 +195,17 @@
       </div>
 
       <div class="field">
-        <label for="prev"><span class="q-num">4.</span>Бывали ли вы ранее в подобных проектах/сообществах?</label>
+        <label for="prev"><span class="q-num">5.</span>Бывали ли вы ранее в подобных проектах/сообществах?</label>
         <textarea id="prev" name="Опыт в других проектах" placeholder="Расскажи, на каких серверах или в каких сообществах уже состоял" required></textarea>
       </div>
 
       <div class="field">
-        <label for="plans"><span class="q-num">5.</span>Чем вы планируете заниматься на нашем сервере?</label>
+        <label for="plans"><span class="q-num">6.</span>Чем вы планируете заниматься на нашем сервере?</label>
         <textarea id="plans" name="Планы на сервере" placeholder="Стройка, выживание, помощь по модерации, участие в ивентах и т.д." required></textarea>
       </div>
 
       <div class="field">
-        <label for="content"><span class="q-num">6.</span>Ведёте ли вы блог или занимаетесь стримингом?</label>
+        <label for="content"><span class="q-num">7.</span>Ведёте ли вы блог или занимаетесь стримингом?</label>
         <span class="hint">Если да — укажите ваши каналы. Если нет, просто напишите «нет».</span>
         <textarea id="content" name="Блог/стрим" placeholder="Например: YouTube — youtube.com/..., Twitch — twitch.tv/..." required></textarea>
       </div>
@@ -272,11 +277,12 @@
 
     const fields = [
       { name: "1. Никнейм", value: data.get("Никнейм") || "—", inline: true },
-      { name: "2. Возраст", value: data.get("Возраст") || "—", inline: true },
-      { name: "3. Как нашли", value: data.get("Как нашли") || "—", inline: true },
-      { name: "4. Опыт в других проектах", value: (data.get("Опыт в других проектах") || "—").slice(0, 1000) },
-      { name: "5. Планы на сервере", value: (data.get("Планы на сервере") || "—").slice(0, 1000) },
-      { name: "6. Блог/стрим", value: (data.get("Блог/стрим") || "—").slice(0, 1000) }
+      { name: "2. Юз в Discord", value: data.get("Юз в Discord") || "—", inline: true },
+      { name: "3. Возраст", value: data.get("Возраст") || "—", inline: true },
+      { name: "4. Как нашли", value: data.get("Как нашли") || "—", inline: true },
+      { name: "5. Опыт в других проектах", value: (data.get("Опыт в других проектах") || "—").slice(0, 1000) },
+      { name: "6. Планы на сервере", value: (data.get("Планы на сервере") || "—").slice(0, 1000) },
+      { name: "7. Блог/стрим", value: (data.get("Блог/стрим") || "—").slice(0, 1000) }
     ];
 
     const payload = {
